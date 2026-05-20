@@ -1,0 +1,86 @@
+package com.orbyte.modelo;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Venta {
+
+    // Atributos
+    private int id;
+    private String numeroFactura;
+    private LocalDateTime fecha;
+    private double subtotal;
+    private double impuesto;
+    private double descuento;
+    private double total;
+    private String metodoPago;
+    private String estado;
+    private int usuarioId;
+
+    // Constructor
+    public Venta(int id, String numeroFactura,
+                 String metodoPago, int usuarioId) {
+
+        this.id = id;
+        this.numeroFactura = numeroFactura;
+        this.metodoPago = metodoPago;
+        this.usuarioId = usuarioId;
+
+        this.fecha = LocalDateTime.now();
+        this.estado = "PAGADA";
+    }
+
+    // Métodos
+    public void crear() {
+        System.out.println("Venta registrada.");
+    }
+
+    public double calcularTotal() {
+        total = subtotal + impuesto - descuento;
+        return total;
+    }
+
+    public void aplicarDescuento(double porcentaje) {
+        descuento = subtotal * (porcentaje / 100);
+    }
+
+    public void cambiarEstado(String nuevoEstado) {
+        this.estado = nuevoEstado;
+    }
+
+    public List<String> obtenerDetalles() {
+
+        List<String> detalles = new ArrayList<>();
+
+        detalles.add("Factura: " + numeroFactura);
+        detalles.add("Método de pago: " + metodoPago);
+
+        return detalles;
+    }
+
+    public String generarFactura() {
+        return "FACT-" + numeroFactura;
+    }
+
+    // Setters
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public void setImpuesto(double impuesto) {
+        this.impuesto = impuesto;
+    }
+
+    // Getters
+    public double getTotal() {
+        return total;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public String getNumeroFactura() {
+        return numeroFactura;
+    }
+}
