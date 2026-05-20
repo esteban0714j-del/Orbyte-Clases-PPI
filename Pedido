@@ -1,0 +1,77 @@
+package com.orbyte.modelo;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Pedido {
+
+    // Atributos
+    private int id;
+    private String mesa;
+    private String estado;
+    private LocalDateTime fechaCreacion;
+    private int usuarioId;
+
+    private List<Producto> productos;
+
+    // Constructor
+    public Pedido(int id, String mesa, int usuarioId) {
+
+        this.id = id;
+        this.mesa = mesa;
+        this.usuarioId = usuarioId;
+        this.estado = "PENDIENTE";
+        this.fechaCreacion = LocalDateTime.now();
+        this.productos = new ArrayList<>();
+    }
+
+    // Métodos
+    public void crear() {
+        System.out.println("Pedido creado.");
+    }
+
+    public void agregarProducto(Producto producto) {
+        productos.add(producto);
+    }
+
+    public void eliminarProducto(int productoId) {
+
+        productos.removeIf(p -> p.getId() == productoId);
+    }
+
+    public double obtenerTotal() {
+
+        double total = 0;
+
+        for (Producto producto : productos) {
+            total += producto.getPrecio();
+        }
+
+        return total;
+    }
+
+    public void cambiarEstado(String nuevoEstado) {
+        this.estado = nuevoEstado;
+    }
+
+    public List<Producto> obtenerDetalles() {
+        return productos;
+    }
+
+    // Getters
+    public int getId() {
+        return id;
+    }
+
+    public String getMesa() {
+        return mesa;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+}
