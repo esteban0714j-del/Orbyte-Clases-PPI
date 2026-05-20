@@ -1,0 +1,80 @@
+// Producto.java
+package com.orbyte.modelo;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Producto {
+
+    // Atributos
+    private int id;
+    private String nombre;
+    private String descripcion;
+    private double precio;
+    private String categoria;
+    private boolean estado;
+    private LocalDateTime fechaCreacion;
+
+    // Constructor
+    public Producto(int id, String nombre, String descripcion,
+                    double precio, String categoria) {
+
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.categoria = categoria;
+        this.estado = true;
+        this.fechaCreacion = LocalDateTime.now();
+    }
+
+    // Métodos
+    public void crear() {
+        System.out.println("Producto creado correctamente.");
+    }
+
+    public void actualizar(String nombre, double precio, String categoria) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.categoria = categoria;
+    }
+
+    public void cambiarEstado(boolean nuevoEstado) {
+        this.estado = nuevoEstado;
+    }
+
+    public static List<Producto> obtenerProductos() {
+        return new ArrayList<>();
+    }
+
+    public static List<Producto> obtenerPorCategoria(String categoria) {
+        return new ArrayList<>();
+    }
+
+    public void eliminar() {
+        this.estado = false;
+        System.out.println("Producto eliminado.");
+    }
+
+    // Getters
+    public int getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+}
