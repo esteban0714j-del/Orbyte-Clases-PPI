@@ -1,0 +1,66 @@
+package com.orbyte.modelo;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Comanda {
+
+    // Atributos
+    private int id;
+    private int numero;
+    private String estado;
+    private LocalDateTime fechaCreacion;
+    private String mesa;
+    private int usuarioId;
+    private int pedidoId;
+
+    private List<String> observaciones;
+
+    // Constructor
+    public Comanda(int id, int numero, String mesa,
+                    int usuarioId, int pedidoId) {
+
+        this.id = id;
+        this.numero = numero;
+        this.mesa = mesa;
+        this.usuarioId = usuarioId;
+        this.pedidoId = pedidoId;
+        this.estado = "EN_COCINA";
+        this.fechaCreacion = LocalDateTime.now();
+        this.observaciones = new ArrayList<>();
+    }
+
+    // Métodos
+    public void crear() {
+        System.out.println("Comanda generada.");
+    }
+
+    public void cambiarEstado(String nuevoEstado) {
+        this.estado = nuevoEstado;
+    }
+
+    public void anotarObservacion(String observacion) {
+        observaciones.add(observacion);
+    }
+
+    public double obtenerTotal(Pedido pedido) {
+        return pedido.obtenerTotal();
+    }
+
+    public List<String> obtenerDetalles() {
+        return observaciones;
+    }
+
+    // Getters
+    public int getNumero() {
+        return numero;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public String getMesa() {
+        return mesa;
+    }
+}
