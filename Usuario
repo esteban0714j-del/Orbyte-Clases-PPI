@@ -1,0 +1,98 @@
+package com.orbyte.modelo;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Usuario {
+
+    // Atributos
+    private int id;
+    private String nombre;
+    private String email;
+    private String password;
+    private String rol;
+    private boolean estado;
+    private LocalDateTime fechaCreacion;
+
+    // Constructor
+    public Usuario(int id, String nombre, String email, String password, String rol) {
+        this.id = id;
+        this.nombre = nombre;
+        this.email = email;
+        this.password = password;
+        this.rol = rol;
+        this.estado = true;
+        this.fechaCreacion = LocalDateTime.now();
+    }
+
+    // Métodos
+    public boolean iniciarSesion(String email, String password) {
+        return this.email.equals(email) && this.password.equals(password);
+    }
+
+    public void cerrarSesion() {
+        System.out.println(nombre + " cerró sesión.");
+    }
+
+    public boolean cambiarPassword(String nuevaPassword) {
+        if (nuevaPassword != null && !nuevaPassword.isEmpty()) {
+            this.password = nuevaPassword;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean actualizarPerfil(String nombre, String email) {
+        this.nombre = nombre;
+        this.email = email;
+        return true;
+    }
+
+    public List<String> obtenerPermisos() {
+
+        List<String> permisos = new ArrayList<>();
+
+        switch (rol.toLowerCase()) {
+
+            case "administrador":
+                permisos.add("GESTION_TOTAL");
+                permisos.add("REPORTES");
+                break;
+
+            case "mesero":
+                permisos.add("REGISTRAR_PEDIDOS");
+                break;
+
+            case "cajero":
+                permisos.add("GESTIONAR_PAGOS");
+                break;
+        }
+
+        return permisos;
+    }
+
+    // Getters y Setters
+    public int getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public LocalDateTime getFechaCreacion() {
+        return fechaCreacion;
+    }
+}
